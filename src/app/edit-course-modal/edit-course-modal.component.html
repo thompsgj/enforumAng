@@ -1,0 +1,89 @@
+<div class="settingsContainer section">
+
+  <div class="modal-header section-head">
+    Edit User Settings
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+
+  <mat-horizontal-stepper #stepper="matHorizontalStepper" >
+    <mat-step [stepControl]="selectForm">
+      <form [formGroup]="selectForm">
+        <div class="form-group">
+
+          <span>Input a students' id number.  Then click "Submit" to edit their account settings.</span>
+
+          <mat-form-field>
+            <input type="text" matInput formControlName="course" [matAutocomplete]="auto">
+
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let course of courseList" [value]="course">{{course.title}} / {{course._id}}</mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        
+
+        </div>
+
+        <button type="submit" class="btn btn-default" mat-button matStepperNext (click)="select()">Submit</button>
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="courseForm">
+      <form [formGroup]="courseForm">
+
+        <ng-template matStepLabel>Course Info</ng-template>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="name">Course Title</label>
+            <input matInput type="text" class="form-control" formControlName="title" name="name">
+          </mat-form-field>
+
+          <mat-error *ngIf="title.invalid && title.touched" class="has-text-danger">
+            A course title is required.
+          </mat-error>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="email">Course Description</label>
+
+            <input matInput type="email" class="form-control" formControlName="description" name="email">
+          </mat-form-field>
+
+          <mat-error *ngIf="description.invalid && description.touched" class="has-text-danger">
+            A course description is required.
+          </mat-error>
+        </div>
+
+        <div class="form-group">
+          <label for="instructor">Instructor</label>
+
+          <select name="instructor" formControlName="instructor">
+            <option *ngFor="let instructor of instructorList" value={{instructor._id}}>{{instructor.name}}</option>
+          </select>
+
+          <mat-error *ngIf="instructor.invalid && instructor.touched" class="has-text-danger">
+            Please select an instructor.
+          </mat-error>
+        </div>
+
+        <button type="button" mat-button matStepperNext>Next</button>
+
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      
+      The course settings will be updated after you click "Submit."  Please make sure to check your work carefully.
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+
+          <button [disabled]="courseForm.invalid || loading" type="submit" class="btn btn-default" (click)="updateCourse()">Submit</button>
+        </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>

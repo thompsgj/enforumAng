@@ -1,0 +1,321 @@
+<div class="settingsContainer section">
+<!-- BEGIN CONTENT -->  
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">Close</button>
+
+  <div class="modal-header section-head">
+    Test Forum 1 Settings
+  </div>
+
+
+         
+
+
+
+
+
+<!-- Experimental Stepper Form -->
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>General Settings</ng-template>
+
+      <div class="section-head">
+        <span class="text-head">General</span>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <label for="name" class="control-label" id="name-label">Assignment Name</label>
+
+          <input matInput type="text" class="form-control col-5" id="name" aria-describedby="name-label" name="name" formControlName="name">
+
+          <mat-error *ngIf="name.invalid && name.touched" class="has-text-danger">
+              The name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+          <label class="control-label col-sm-3" id="description-label" for="description">Task Description</label>
+
+          <div>        
+              <editor formControlName="description" matInput></editor>
+          </div>
+
+          <mat-error *ngIf="description.invalid && description.touched" class="has-text-danger">
+              A description is required.
+          </mat-error>
+      </div>
+
+      <div class="section-head">
+        <span class="text-head">Grading</span>
+      </div>
+      
+       <!-- Grade Total -->
+      <div class="form-group">
+        <mat-form-field>
+          <label class="control-label" id="total-points-label" for="total-points">Grade Total</label>
+
+          <input matInput type="text" class="form-control" id="total-points" aria-describedby="total-points-label" name="points" formControlName="points">
+
+          <mat-error *ngIf="points.invalid && points.touched" class="has-text-danger">
+              A total point value is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="section-head">
+        <span class="text-head">Reflection Activities</span>
+      </div>
+
+
+
+      <!-- Checklist Toggle -->
+      <div class="form-group">
+        <div class="col-sm-7 checkbox">
+          <label class="form-check-label" id="peer-grading-label">
+          
+          <mat-checkbox class="form-check-input" id="peer-grading" ng-true-value="true" ng-false-value="false" name="peereval" formControlName="checklist" (change) = "clearCriteria()"> Checklist</mat-checkbox>
+
+
+          </label>
+        </div>
+      </div>
+
+
+      <!-- Reflective Task Toggle -->
+      <div class="form-group">
+        <div class="col-sm-7 checkbox">
+            <label class="form-check-label" id="reflection-toggle-label">
+
+            <mat-checkbox class="form-check-input" id="reflection-toggle" ng-true-value="true" ng-false-value="false" name="reflection" formControlName="reflection" (change) = "clearReflection()"> Reflective Task</mat-checkbox>
+          </label>
+        </div>
+      </div>
+
+
+      <!-- Goals Toggle -->
+      <div class="form-group">
+        <div class="col-sm-7 checkbox">
+            <label class="form-check-label" id="reflection-toggle-label">
+
+            <mat-checkbox class="form-check-input" id="goals-toggle" ng-true-value="true" ng-false-value="false" name="goals" formControlName="goals"> Personal Goal Setting</mat-checkbox>
+          </label>
+        </div>
+      </div>
+
+
+      <div>
+        <button type="button" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Checklist Task -->
+  <mat-step [stepControl]="secondFormGroup" *ngIf="firstFormGroup.value.checklist">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Checklist</ng-template>
+
+      <div class="section-head">
+        <span class="text-head">Checklist Settings</span>
+      </div>
+
+      <button type="button" (click)="addCriteria()">Add Criteria</button>
+      
+      <div formArrayName="criteriaList" *ngFor="let item of secondFormGroup.get('criteriaList').controls; index as i">
+          
+          <div [formGroupName]="i">
+            <mat-form-field>
+              <input type="text" formControlName="criteria" placeholder="Criteria {{ i + 1 }}" matInput> 
+            </mat-form-field>
+            <i class="fa fa-times" aria-hidden="true" (click)="removeCriteria(i)"></i>
+          </div>
+          
+      </div>
+
+
+      <div>
+        <button type="button" mat-button matStepperPrevious>Back</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+        
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Reflection Task -->
+  <mat-step [stepControl]="thirdFormGroup" *ngIf="firstFormGroup.value.reflection">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Reflective Task</ng-template>
+
+      <div class="section-head">
+        <span class="text-head">Reflection Prompts</span>
+      </div>
+
+      <button type="button" (click)="addQuestion()">Add Reflection Prompt</button>
+      
+      <div formArrayName="questionList" *ngFor="let item of thirdFormGroup.get('questionList').controls; index as i">
+
+          <div [formGroupName]="i">
+            <mat-form-field>
+              <input type="text" formControlName="question" placeholder="Question/Task {{ i + 1 }}" matInput>
+            </mat-form-field>
+            <i class="fa fa-times" aria-hidden="true" (click)="removeQuestion(i)"></i>
+          </div>
+          
+      </div>
+
+      <div>
+        <button type="button" mat-button matStepperPrevious>Back</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    
+    The forum will be created once you click "Submit."  Please review the forum settings carefully.
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      
+      <button [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid || loading" type="submit" class="btn btn-default" (click)="createForum()">Submit</button>
+
+
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Original Stepper Forms -->
+<!--
+<button mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button>
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" (ngSubmit)="form1()" #formone="ngForm">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button type="button" mat-button matStepperNext>Next</button>
+        <button type="submit" mat-button>submit</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup" (ngSubmit)="form2()" #formtwo="ngForm">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button type="button" mat-button matStepperPrevious>Back</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+         <button type="submit" mat-button>submit</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup" (ngSubmit)="form3()" #formthree="ngForm">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="thirdCtrl" required>
+      </mat-form-field>
+      <div>
+        <button type="button" mat-button matStepperPrevious>Back</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+         <button type="submit" mat-button>submit</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button type="button" (click)="stepper.reset()">Reset</button>
+      <button mat-button type="button" (click)="formone.ngSubmit.emit();formtwo.ngSubmit.emit();formthree.ngSubmit.emit()">
+        submit
+        </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+-->
+
+
+<!--
+<mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" (ngSubmit)="form1()" #formone="ngForm">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <mat-checkbox formControlName="toggleReflection" [(ngModel)]="checked" (click)="resetSection()">Reflection
+      </mat-checkbox>
+      <div>
+        <button type="button" mat-button matStepperNext>Next</button>
+        <button type="submit" mat-button>submit</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" *ngIf="checked">
+    <form [formGroup]="secondFormGroup" (ngSubmit)="form2()" #formtwo="ngForm">
+      <ng-template matStepLabel>Reflection</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button type="button" mat-button matStepperPrevious>Back</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+         <button type="submit" mat-button>submit</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button type="button" (click)="stepper.reset()">Reset</button>
+      <button mat-button type="button" (click)="formone.ngSubmit.emit();formtwo.ngSubmit.emit()">
+        submit
+        </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+-->

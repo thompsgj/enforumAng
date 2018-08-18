@@ -1,0 +1,38 @@
+<div class="pr-container">
+ 
+    <mat-card class="pr-admin-control" >
+        <mat-card-header>
+          <h3>Your profile</h3>
+        </mat-card-header>
+
+        <mat-card-content>
+          Name: {{details.name}}<br>
+          Email: {{details.email}}<br>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <div class="pr-admin-buttons" *ngIf="isAdmin || isTeacher">
+            <button mat-button (click)="addUser()">Add User</button>
+            <!--<i class="fas fa-user-plus" [routerLink]="['/adduser']"></i>-->
+
+            <button mat-button (click)="editUser()">Edit User</button>
+
+            <button mat-button (click)="addCourse()">Add Course</button>
+
+            <button mat-button (click)="editCourse()">Edit Course</button>
+          </div>
+          <div class="pr-all-role-buttons">
+            <button mat-button (click)="editProfile()">Edit Profile</button>
+          </div>
+        </mat-card-actions>
+    </mat-card>
+
+    <div class="pr-courseContainer" >
+      <h3>Your Courses</h3>
+      <mat-card class="pr-courseCard" *ngFor="let course of courses">
+        <a [routerLink]="['/forum', course._id]">{{course.title}}</a>
+      </mat-card>
+
+    </div>
+
+</div>

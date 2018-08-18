@@ -1,0 +1,38 @@
+<div class="container">
+<div class="pl-postList" *ngFor = "let thread of posts">
+<mat-card class="pl-post">
+	<mat-card-header>
+		<mat-card-title>
+			<h3>{{thread.settings.name}}</h3>
+		</mat-card-title>
+	</mat-card-header>
+
+	<mat-card-content class="pl-contents">
+		<span [innerHTML]="thread.settings.description"></span>
+	</mat-card-content>
+
+	<mat-card-actions>
+		<div class="pl-add">
+			<button mat-button type="button" class="btn btn-light" (click)="createPost()">
+				Add Post
+			</button>
+		</div>
+	</mat-card-actions>
+</mat-card>
+
+<div class="pl-posts" *ngFor = "let post of thread.posts">
+	<div class="topic">
+		<div class="title">
+			<a [routerLink]="['/posts',post._id]">{{post.title}}</a>
+		</div>
+
+		<div class="pl-icons" *ngIf="toggleViewRole(post.userid)">
+			<i class="fas fa-edit" (click)="editPost(post._id)"></i><br>
+
+			<i class="fas fa-trash" (click)="deletePost(post._id)"></i>
+		</div>
+	</div>
+</div>
+
+</div>
+</div>

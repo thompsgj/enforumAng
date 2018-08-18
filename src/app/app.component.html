@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed-top">
+  <div class="container-fluid">
+  <!-- Toggler Button -->
+    <div *ngIf="auth.isLoggedIn(); else loggedOut">
+      <a [routerLink]="['/profile']" class="navbar-brand">Enhanced Forum</a>
+    </div>
+
+    <ng-template #loggedOut>
+      <a [routerLink]="['/home']" class="navbar-brand">Enhanced Forum</a>
+    </ng-template>
+    
+    <button type="button" class="navbar-toggler"  data-toggle="collapse" data-target="#pageNavbar" aria-controls="pageNavbar" aria-expanded="false">
+      <span class="sr-only">Toggle Navigation</span>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="pageNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active dropdown" *ngIf="auth.isLoggedIn()">
+          <a [routerLink]="['/profile']">Home</a>
+        </li>
+       
+        <li *ngIf="!auth.isLoggedIn()" class="nav-item active dropdown">
+          <a [routerLink]="['/home']">Login</a>
+        </li>
+
+        <li *ngIf="auth.isLoggedIn()" class="nav-item active dropdown">
+          <a (click)="auth.logout()">Logout</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="content">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

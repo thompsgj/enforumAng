@@ -1,0 +1,30 @@
+<div class="forumContainer">
+	<h3>{{title}}</h3>
+	<div class="new" *ngIf="isTeacher || isAdmin">
+		<i class="fas fa-user-plus" (click)="enrollUser()"></i>
+
+		<i class="fas fa-plus-circle" (click)="createForum()"></i>
+	</div>
+
+	<div class="forums" *ngFor="let forum of forums">
+		<div class="topic">
+			<div class="title">
+				<a [routerLink]="['/thread', forum._id]">{{forum.settings.name}}</a><br>
+			</div>
+			<!-- <button (click)="editForum(forum._id)">
+				<i class="fas fa-edit"></i>
+			</button>
+			-->
+			<div class="icons" *ngIf="isTeacher || isAdmin">
+				<i class="fas fa-edit" (click)="editForum(forum._id)"></i><br>
+
+				<i class="fas fa-trash" (click)="deleteForum(forum._id)"></i>
+			</div>
+		</div>
+		<div class="expand">
+			<div class="expandIcon">
+				<i class="fas fa-chevron-down"></i>
+			</div>
+		</div>
+	</div>
+</div>

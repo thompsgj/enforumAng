@@ -1,0 +1,51 @@
+
+<div class="settingsContainer em-section">
+<!-- BEGIN CONTENT-->
+	<div class="modal-header section-head">
+		Enrollments Management
+		<button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">Close</button>
+	</div>
+
+	<div class="em-formContainer">
+		<div class="modal-header section-head">
+			Student Id Search
+		</div>
+
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label for="student" id="student-label">Enter Student ID</label>
+				<div>
+					<input type="text" class="form-control" id="student" aria-describedby="student-label" name="student" [(ngModel)]="term" placeholder="Enter Name">
+				</div>
+			</div>
+			<div class="submission">
+				<button mat-button type="submit" class="btn btn-default" (click)="retrieveUserMatch()">Submit</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="em-resultsContainer">
+		<div class="modal-header section-head">
+			User Search Results
+		</div>
+
+		<ul class="em-user-results" *ngFor="let user of users">
+			<li>{{user.name}} / {{user.studentid}} <i class="fas fa-plus" (click)="enrollUser(user._id)"></i>
+		</ul>		
+	</div>
+
+
+	<div class="em-userContainer">
+		<div class="modal-header section-head">
+			List of Current Users
+		</div>
+		
+		<div class="em-enrolled-users" *ngFor="let enroll of enrolled">
+			{{enroll.name}} / {{enroll.studentid}}<i class="fa fa-times" aria-hidden="true" (click)="unenrollUser(enroll.id)"></i>
+<!--
+			<button type="button" class="btn btn-default" (click)="unenrollUser(enroll.id)">Unenroll</button>
+			}
+-->
+		</div>
+	</div>
+</div>

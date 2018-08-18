@@ -1,0 +1,122 @@
+<div class="settingsContainer section">
+
+  <div class="modal-header section-head">
+    Add User
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+
+  <mat-horizontal-stepper #stepper="matHorizontalStepper">
+    <mat-step>
+      <form [formGroup]="userForm">
+
+        <ng-template matStepLabel>User Info</ng-template>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="name">Full name</label>
+            
+            <input matInput type="text" formControlName="name" class="form-control" name="name">
+
+            <mat-error *ngIf="name.invalid && name.touched" class="has-text-danger">
+              The name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="email">Email address</label>
+
+            <input matInput type="email" formControlName="email" class="form-control" name="email">
+
+            <mat-error *ngIf="email.invalid && email.touched" class="has-text-danger">
+              A valid email is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="studentid">Student Id</label>
+
+            <input matInput type="studentid" formControlName="studentid" class="form-control" name="studentid">
+
+            <mat-error *ngIf="studentid.invalid && studentid.touched" class="has-text-danger">
+              A student id number is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="password">Password</label>
+
+            <input matInput type="password" formControlName="password" class="form-control" name="password">
+
+            <mat-error *ngIf="password.invalid && password.touched" class="has-text-danger">
+              Please type a password.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role</label>
+            
+            <select name="role" formControlName="role">
+              <option value="teacher" selected>Teacher</option>
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
+
+            <mat-error *ngIf="role.invalid && role.touched" class="has-text-danger">
+              A user role is required.
+            </mat-error>
+        </div> 
+
+          <button type="button" mat-button matStepperNext>Next</button>
+   
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      
+      A new user account will be created after you click "Submit."  Please make sure to check your work carefully.
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+
+          <button [disabled]="userForm.invalid || loading" type="submit" class="btn btn-default" (click)="register()">Submit</button>
+        </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+<!--
+    <div class="col-md-6">
+      <h1>Add User</h1>
+      <form (submit)="register()">
+        <div class="form-group">
+          <label for="name">Full name</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select name="role" [(ngModel)]="credentials.role">
+          	<option value="teacher" selected>Teacher</option>
+          	<option value="student">Student</option>
+          	<option value="admin">Admin</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-default">Register!</button>
+      </form>
+    </div>
+  </div>
+-->
+</div>

@@ -1,0 +1,93 @@
+<div class="settingsContainer section">
+
+  <div class="modal-header section-head">
+    Add Course
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+
+  <mat-horizontal-stepper>
+    <mat-step>
+      <form [formGroup]="courseForm">
+
+        <ng-template matStepLabel>Course Info</ng-template>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="name">Course Title</label>
+            <input matInput type="text" class="form-control" formControlName="title" name="name">
+          </mat-form-field>
+
+          <mat-error *ngIf="title.invalid && title.touched" class="has-text-danger">
+            A course title is required.
+          </mat-error>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <label for="email">Course Description</label>
+
+            <input matInput type="email" class="form-control" formControlName="description" name="email">
+          </mat-form-field>
+
+          <mat-error *ngIf="description.invalid && description.touched" class="has-text-danger">
+            A course description is required.
+          </mat-error>
+        </div>
+
+        <div class="form-group">
+          <label for="instructor">Instructor</label>
+
+          <select name="instructor" formControlName="instructor">
+            <option *ngFor="let instructor of instructorList" value={{instructor._id}}>{{instructor.name}}</option>
+          </select>
+
+          <mat-error *ngIf="instructor.invalid && instructor.touched" class="has-text-danger">
+            Please select an instructor.
+          </mat-error>
+        </div>
+
+        <button type="button" mat-button matStepperNext>Next</button>
+
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      
+      A new course will be created after you click "Submit."  Please make sure to check your work carefully.
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+
+          <button [disabled]="courseForm.invalid || loading" type="submit" class="btn btn-default" (click)="addCourse()">Submit</button>
+        </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+<!--
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Course Creation</h1>
+      <form (submit)="addCourse()">
+
+        <div class="form-group">
+          <label for="name">Course Title</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter course title" [(ngModel)]="course.title">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Course Description</label>
+          <input type="email" class="form-control" name="email" placeholder="Enter a brief description" [(ngModel)]="course.description">
+        </div>
+
+        <div class="form-group">
+          <label for="instructor">Instructor</label>
+          <input type="instructor" class="form-control" name="instructor" placeholder="Enter instructor" [(ngModel)]="course.instructor">
+        </div>
+        
+        <button type="submit" class="btn btn-default">Register!</button>
+      </form>
+    </div>
+  </div>
+-->
+
+</div>

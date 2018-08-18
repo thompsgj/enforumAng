@@ -1,0 +1,518 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+	background-color : #4e7ac7;
+}
+
+
+/* Forum List */
+.forumContainer {
+	width: 700px;
+	text-align:center;
+	margin: 10px auto;
+}
+
+.new {
+	margin: 0 auto;
+}
+.new i {
+	font-size: 35px;
+	margin: 15px;
+	color: #A3CC3C;
+}
+.forums {
+	width: 500px;
+	margin: 0px auto 20px auto;
+}
+
+.topic {
+	background-color: white;
+	height: 100px;
+	width: 500px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	float:left;
+	width: 90%;
+	height: 100%;
+	font-size: 20px;
+}
+.icons {
+	padding: 3px;
+	width: 10%;
+	height: 100%;
+	float:right;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.icons i {
+	font-size: 35px;
+}
+
+.expand {
+	background-color: #343a40;
+	height: 35px;
+}
+
+.expandIcon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 3px;
+	width: 10%;
+	color: white;
+	font-size: 35px;
+	float: right;
+}
+
+
+.fa-trash {
+	color: red;
+}
+
+
+/* Post List */
+.pl-title {
+	float:left;
+}
+.pl-icons {
+	padding: 3px;
+	width: 10%;
+	height: 100%;
+	float:right;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.pl-icons i {
+	font-size: 35px;
+}	
+
+.pl-post {
+	width: 500px;
+	margin: 10px auto 20px auto;
+}
+.pl-posts {
+	width: 500px;
+	margin: 0px auto 20px auto;
+	min-height: 100px;
+}
+
+/*
+	.pl-post {
+		background: #ddddc2;
+		//rgb(221, 221, 194)
+		min-height: 75px;
+		width: 500px;
+		margin-bottom: 5px;
+	}
+	.pl-image {
+		float: left;
+		background-color: red;
+	}
+	.pl-contents {
+		clear: right;
+		height: 50px;
+	}
+	.pl-title {
+		font-size: 25px
+	}
+	.pl-buttons {
+		float: right;
+		height: 25px;
+		clear: right;
+	}
+	.pl-replyButton {
+		float: right;
+		height:100%;
+		width: 60px;
+		text-align: center;
+		background-color: #8B86F5;
+		text-align: center;
+	}
+	.pl-deleteButton {
+		float: right;
+		height:100%;
+		background-color: #C77DFB;
+		width: 55px;
+		text-align: center;
+	}
+*/
+
+/* Reply List Page */
+	#pp-forumContainer {
+		width: 700px;
+		clear: both;
+	}
+	.pp-repliesContainer {
+		float: right;
+		width: 500px;
+	}
+
+	/* Post CSS */
+	.pp-post {
+		margin-top: 10px;
+	}
+
+	.pp-post-head {
+		display: flex;
+		justify-content: space-between;
+		width: 700px;
+		color: white;
+	}
+
+	.pp-post-footer {
+		height: 44px;
+	}
+
+	/* Reflection CSS */
+	.pp-reflection-spacer {
+		clear: both;
+	}
+	.pp-reflectButton {
+		float: right;
+		width: 15%;
+		background-color: grey;
+	}
+	.pp-reflection {
+		clear: both;
+		background: rgba(0,0,0,0.20);
+		padding: 10px;
+	}
+
+	.pp-reflectionChecklistContainer {
+		float: left;
+		width: 45%;
+	}
+	.pp-studentReflectionContainer {
+		float: right;
+		width: 45%;
+	}
+	.pp-checklistTitle, .pp-selfReflectionTitle, .pp-teacherFeedbackTitle {
+		background-color: #35478c;
+		color: white;
+		text-align: center;
+		clear:both;
+	}
+	ul.pp-reflection-list   {
+		list-style-type: none;
+		margin: 0;
+		padding: 10px;
+	}
+
+	.pp-submit-button {
+		float: right;
+	}
+
+	/* Reply CSS */
+	.pp-reply {
+		margin-top: 40px;
+	}
+	.pp-reply-head {
+		display: flex;
+		justify-content: space-between;
+		width: 500px;
+		color: white;
+	}
+
+	.pp-reply-footer{
+		clear:both;
+		height: 44px;
+	}
+	.pp-deleteButton {
+		float: left;
+		padding-left: 15px;
+	}
+	.pp-replyButton {
+		float: right;
+		padding-right: 16px;
+	}
+	.pp-contentContainer {
+		padding: 15px
+	}
+	/* End Reply CSS */
+
+
+  .cdk-global-overlay-wrapper, .cdk-overlay-container {
+     z-index: 99999 !important;
+  }
+
+
+/*OLD
+	
+	#pp-forumContainer {
+		width: 700px;
+		clear: both;
+	}
+	.pp-repliesContainer {
+		float: right;
+		width: 500px;
+	}
+
+	.pp-reply2 {
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		overflow: hidden;
+	}
+
+
+
+
+	.pp-title {
+		width: 90%;
+		float: left;
+		padding-left: 5px;
+	}
+	.pp-title.pp-post {
+		font-size: 25px;
+		background-color: #f2594b;
+	}
+	.pp-title.pp-reply {
+		font-size: 15px;
+		background-color: #63a69f;
+	}
+	.pp-editButton {
+		width: 10%;
+		float: right;
+		background-color: lightgrey;
+		text-align: center;
+	}
+	.pp-editButton.pp-post {
+		height: 38px;
+	}
+
+
+
+
+
+	.pp-info {
+		float: left;
+		width: 20%;
+		padding: 5px;
+		text-align: center;
+	}
+	.pp-contentContainer {
+		clear:both;
+		background: rgb(221,221,194);
+		overflow: auto;
+	}
+	.pp-content {
+		float: right;
+		width: 80%;
+		padding: 10px;
+	}
+	.pp-content.pp-reply {
+		font-size: 12px;
+	}
+
+
+
+
+	.pp-footer {
+		min-height: 24px;
+		margin-bottom: 15px;
+		background: rgb(221,221,194);
+		clear:both;
+	}
+	.pp-replyButton {
+		float: right;
+		width: 10%;
+		text-align: center;
+		background-color: #8B86F5; 
+	}
+	.pp-reflectButton {
+		float: right;
+		width: 15%;
+		background-color: grey;
+	}
+	.pp-reflection {
+		clear: both;
+		background: rgba(0,0,0,0.20);
+		padding: 10px;
+	}
+
+	.pp-reflectionChecklistContainer {
+		float: left;
+		width: 50%;
+	}
+	.pp-studentReflectionContainer {
+		float: right;
+		width: 50%;
+	}
+	.pp-checklistTitle, .pp-selfReflectionTitle, .pp-teacherFeedbackTitle {
+		background-color: #35478c;
+		color: white;
+		text-align: center;
+		clear:both;
+	}
+	#pp-forumContainerFooter {
+		clear: both;
+		min-height: 5px;
+	}
+
+*/
+body { margin: 0; }
+
+body { margin: 0; }
+
+
+/* Settings */
+.settingsContainer {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+label {
+
+}
+.section-head {
+	background-color: #343a40;
+	height: 30px;
+}
+.text-head {
+	color: white
+}
+.section {
+	background-color: #ddddc2;
+	overflow: hidden;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+.settings-modal .modal-dialog{
+  width:500px;
+  height:550px;
+  background-color: transparent;
+}
+
+.modal-header {
+  padding: 0px;
+  margin: 0px;
+  color: white;
+}
+
+.modal-content {
+	background-color: black;
+	height: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+.modal-body {
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
+}
+
+.modal-footer {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* Enroll Modal */
+.em-formContainer {
+	clear:both;
+
+}
+
+.em-resultsContainer {
+	float: left;
+	width: 50%;
+	padding: 10px;
+}
+
+.em-resultsContainer ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;	
+}
+
+.em-userContainer {
+	float: right;
+	width: 50%;
+	padding: 10px;
+}
+
+.em-user-results {
+
+}
+
+.em-enrolled-users {
+
+}
+
+.em-section {
+	background-color: white;
+	overflow: hidden;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Profile */
+.pr-container {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.pr-courseContainer {
+	width: 250px;
+	margin: 0 auto;
+	text-align: center;
+}
+.pr-courseCard {
+	margin-bottom: 10px;
+	width: 250px;
+}
+
+.fa-user-plus {
+	color:#A3CC3C;
+	font-size: 35px;
+}
+
+.pr-admin-control {
+	width: 250px;
+	margin: 10px auto 30px auto;
+}
+
+.pr-admin-buttons, .pr-all-role-buttons {
+	text-align: center;
+}
+
+/* Home */
+.hm-sign-in-card {
+	width: 300px;
+	margin: 10px auto 0px auto;
+}
+
+.hm-mat-card-buttons {
+	text-align: right;
+}
+
+/* Registration */
+.rg-register-card {
+	margin: 10px auto 0px auto;
+	width: 400px;
+}

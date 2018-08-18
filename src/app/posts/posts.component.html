@@ -1,0 +1,170 @@
+<div id="pp-forumContainer">
+	<mat-card class="pp-post" [ngStyle]="{'padding': '0px'}">
+		<!--Post Heading -->
+		<mat-card-header class="pp-post-head" [ngStyle]="{'background-color': '#343a40'}">
+			<mat-card-title>
+				{{replies[0].posts[0].title}}
+			</mat-card-title>
+			<mat-card-subtitle [ngStyle]="{'color': 'white'}">
+				{{replies[0].posts[0].poster}}
+			</mat-card-subtitle>
+			<button mat-button class="pp-editButton pp-post" *ngIf="toggleViewRole(replies[0].posts[0].userid)">
+				Edit
+			</button>
+		</mat-card-header>
+
+		<mat-card-content class="pp-contentContainer">
+			<span [innerHTML]='replies[0].posts[0].content | htmlAllow '></span>
+		</mat-card-content>
+
+		<mat-card-actions class="pp-post-footer">
+			<div class="pp-replyButton">
+				<button mat-button type="button" class="btn btn-light" (click)="createReply()">Reply
+				</button>
+			</div>
+
+		</mat-card-actions>
+<!--
+			<mat-card-actions class="pp-reply-footer">
+				<div class="pp-deleteButton" *ngIf="toggleViewRole(reply.userid)">
+					<button mat-button class="btn btn-light" (click)="deleteReply(reply._id)">Delete</button>
+				</div>
+
+				<div class="pp-replyButton">
+					<button mat-button class="btn btn-light" ng-click="vm.addReply(data.id)">
+						Reply
+					</button>
+				</div>
+			</mat-card-actions>
+
+-->
+
+
+  <mat-expansion-panel *ngIf="toggleViewRole(replies[0].posts[0].userid) || isTeacher">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Reflection Work
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+	<div class="pp-reflection-spacer"></div>
+	<div class="pp-reflectionChecklistContainer">
+		<div class="pp-checklistTitle" >
+			Assignment Checklist
+		</div>
+		<div>
+			<ul class="pp-reflection-list" *ngFor="let criteria of replies[0].posts[0].criterias; index as i">
+				<li>{{criteria.criteria}}<input type="checkbox" [checked]="criteria.selected" onclick="this.checked=!this.checked;"></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="pp-studentReflectionContainer">
+		<div class="pp-selfReflectionTitle">
+			Self-reflection Summary
+		</div>
+		<div>
+			<ul class="pp-reflection-list" *ngFor="let question of replies[0].posts[0].reflectionTasks; index as i">
+				<li><b>{{question.question}}</b></li>
+					{{question.response}}
+				</ul>
+		</div>
+	</div>
+	<div class="pp-reflection-spacer"></div>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel *ngIf="toggleViewRole(replies[0].posts[0].userid) || isTeacher">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Teacher Feedback
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+				
+    <div class="pp-teacherFeedbackContainer">
+		<div class="pp-teacherFeedbackTitle">
+			Teacher Feedback
+		</div>
+		<div class="pp-teacherFeedback"> 
+			<ng-container *ngIf="toggleViewRole(replies[0].posts[0].userid) && !isTeacher && !isAdmin; else editorView">
+				<span [innerHTML]='replies[0].posts[0].teacherFeedback | htmlAllow '></span>
+			</ng-container>
+
+			<ng-template #editorView>
+				<ng-container>
+					<form [formGroup]="feedbackForm" >
+						<div class="form-group" >
+							<editor formControlName="comment" name="comment"></editor>
+						</div>
+
+
+					    <mat-error *ngIf="comment.invalid && comment.touched" class="has-text-danger">
+					    	Feedback is required.
+					    </mat-error>
+						
+						<div class="form-group">
+							<label>Grade</label>
+							<select formControlName="grade">
+								<option *ngFor="let grade of gradeOptions" value="">{{grade}}</option>
+							</select>
+						</div>
+						<div class="pp-submit-button">
+							<button [disabled]="feedbackForm.invalid || loading" type="submit" class="btn btn-default" (click)="feedbackResponse()">Submit</button>
+						</div>
+						<div class="pp-reflection-spacer"></div>
+					</form>
+				</ng-container>
+			</ng-template>
+		</div>
+
+
+
+
+	</div>
+  </mat-expansion-panel>
+</mat-card>
+
+
+
+
+	<div class="pp-repliesContainer">
+	<!--DYNAMICALLY CREATED REPLIES -->
+		<mat-card class="pp-reply" *ngFor = "let reply of replies[0].posts[0].replies" [ngStyle]="{'padding': '0px'}">
+			<!-- Reply Heading -->
+			<mat-card-header class="pp-reply-head" [ngStyle]="{'background-color': '#343a40'}">
+				<mat-card-title>
+					{{reply.title}} {{reply.id}}
+				</mat-card-title>
+
+				<mat-card-subtitle class="pp-subtitle" [ngStyle]="{'color': 'white'}">
+					{{reply.poster}}
+				</mat-card-subtitle>
+
+				<button mat-button (click)="editReply(reply._id)" *ngIf="toggleViewRole(reply.userid)">
+					Edit
+				</button>
+			</mat-card-header>
+
+			<!-- Replier and Replier's Content -->
+			<mat-card-content class="pp-contentContainer">
+				<div class="pp-content">
+					<span [innerHTML]="reply.content | htmlAllow"></span>
+				</div>
+			</mat-card-content>
+
+			<!-- Reply Button -->
+			<mat-card-actions class="pp-reply-footer">
+				<div class="pp-deleteButton" *ngIf="toggleViewRole(reply.userid)">
+					<button mat-button class="btn btn-light" (click)="deleteReply(reply._id)">Delete</button>
+				</div>
+
+				<div class="pp-replyButton">
+					<button mat-button class="btn btn-light" (click)="createReply()">
+						Reply
+					</button>
+				</div>
+			</mat-card-actions>
+		</mat-card>
+	<!-- END OF DYNAMIC REPLIES -->	
+	</div>
+</div>

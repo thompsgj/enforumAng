@@ -1,0 +1,46 @@
+<div class="container">
+  
+  <mat-card class="hm-sign-in-card">
+  	<mat-card-header>
+      <mat-card-title>
+  		  <h3>Sign In</h3>
+      </mat-card-title>
+  	</mat-card-header>
+
+  	<mat-card-content>
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput type="email" class="form-control" formControlName="email" name="email" placeholder="Enter email">
+
+            <mat-error *ngIf="email.invalid && password.touched" class="has-text-danger">
+              A valid email is required to sign in.
+            </mat-error>
+          
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput type="password" class="form-control" formControlName="password" name="password" placeholder="Password">
+          </mat-form-field>
+          
+          <mat-error *ngIf="password.invalid && password.touched" class="has-text-danger">
+              Please type in a valid password.
+            </mat-error>
+        </div>
+
+        <button [disabled]="loginForm.invalid || loading" type="submit" class="btn btn-default" (click)="login()">Sign in!</button>
+      </form>  		
+  	</mat-card-content>
+
+  	<mat-card-actions class="hm-mat-card-buttons">
+	  	<a routerLink="/register">New Account</a>
+  	</mat-card-actions>
+  	
+
+  </mat-card>
+
+
+
+</div>
