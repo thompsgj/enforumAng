@@ -4,7 +4,7 @@ var asynch = require('asynch');
 var db = monk('localhost:27017/enforum');
 var forumcoll = db.get('forumcollection');
 var coursecoll = db.get('coursecollection');
-var userscoll = db.get('users');
+var userscoll = db.get('userscollection');
 
 var sendJsonResponse = function(res, status, content) {
 	res.status(status);

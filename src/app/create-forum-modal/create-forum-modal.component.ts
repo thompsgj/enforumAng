@@ -154,7 +154,7 @@ export class CreateForumModalComponent {
   @Output()
   add: EventEmitter<Forum> = new EventEmitter();
 
-  createForum(forum) {
+  createForum() {
     this.settings.name = this.firstFormGroup.value.name
     this.settings.description = this.firstFormGroup.value.description
     this.settings.points = this.firstFormGroup.value.points

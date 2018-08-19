@@ -59,7 +59,7 @@
         <div>
           <button mat-button matStepperPrevious>Back</button>
 
-          <button [disabled]="courseForm.invalid || loading" type="submit" class="btn btn-default" (click)="addCourse()">Submit</button>
+          <button [disabled]="courseForm.invalid" type="submit" class="btn btn-default" (click)="addCourse()">Submit</button>
         </div>
     </mat-step>
   </mat-horizontal-stepper>

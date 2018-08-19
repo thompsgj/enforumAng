@@ -100,7 +100,7 @@
 		      
 		      <button mat-button matStepperPrevious>Back</button>
 		      
-		      <button [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid || loading" type="submit" class="btn btn-default" (click)="editPost()">Submit</button>
+		      <button [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid" type="submit" class="btn btn-default" (click)="editPost()">Submit</button>
 		    </div>
 		</mat-step>
 	</mat-horizontal-stepper>
